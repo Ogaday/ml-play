@@ -1,5 +1,7 @@
+from . import functions
+
 class Perceptron:
-    def __init__(self, ni, weights = None, func = heaviside):
+    def __init__(self, ni, weights = None, func = functions.heaviside):
         """
         Create a perceptron instance.
         """
