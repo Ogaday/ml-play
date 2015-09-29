@@ -5,6 +5,7 @@ import ann.functions
 def test_pass():
     pass
 
+
 def test_perceptron_activate_with_heaviside_no_weights():
     """
     Generate tests of different Perceptron instances activating using the heaviside with no weights.
@@ -32,6 +33,7 @@ def test_perceptron_activate_with_heaviside_no_weights():
 def check_perceptron_activate_with_heaviside_no_weights(perc, in_vecs, out):
     assert(perc.activate(in_vecs) == out)
 
+    
 def test_perceptron_activate_with_heaviside_unit_weights():
     """
     Generate tests of different Perceptron instances activating using the heaviside with unit weights.
@@ -59,3 +61,4 @@ def test_perceptron_activate_with_heaviside_unit_weights():
 def check_perceptron_activate_with_heaviside_unit_weights(perc, in_vecs, out):
     print(in_vecs, out)
     assert(perc.activate(in_vecs) == out)
+
