@@ -57,6 +57,7 @@ class Perceptron:
         # have a default alpha size
         # have a default number of iterations
         # perhaps have some arguments about other termination criteria.
+        
     def accuracy(self, Xtr):
         results = [self.activate(row[:-1])==row[-1] for row in Xtr]
         return sum(results)/len(results)
@@ -94,7 +95,7 @@ class Network:
         For the source and sink vertices, ie. the input and output vectors, edges are sorted by the rank of the
         connected vertices.
         
-        RE: vertex class, can be subclassed for source and sink this fire method could be overwritten...
+        RE: vertex class. Can be subclassed for source and sink this fire method could be overwritten...
         """
         ins = {e for e in self.E if e[1] == v}
         outs = {e for e in self.E if e[0] == v}
@@ -116,3 +117,8 @@ class Network:
             val = self.func(sum([self.weights[e]*self.network[e] for e in ins]))
             for e in outs:
                 self.network[e] = val
+                
+# Define a new network class with a different structure:
+# More topologically focused, ie. two sets, one for the neurons which have been fired, one for the neurons which have not been fired.
+# A dictionary of dependencies for each neuron, so that topological sorting is possible.
+# I think a dictionary of for edges (in the form (head, tail)) and weights still makes sense.
