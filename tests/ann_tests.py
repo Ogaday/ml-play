@@ -31,4 +31,31 @@ def test_perceptron_activate_with_heaviside_no_weights():
     
 def check_perceptron_activate_with_heaviside_no_weights(perc, in_vecs, out):
     assert(perc.activate(in_vecs) == out)
+
+def test_perceptron_activate_with_heaviside_unit_weights():
+    """
+    Generate tests of different Perceptron instances activating using the heaviside with unit weights.
     
+    Method:    
+     - Initialise a list of perceptrons with a different number of inputs (one to four) and unit weights.
+     - Generate sets of inputs with which to activate the perceptrons.
+     - Generate the expected results from activating the perceptrons with such inputs and unit weights.
+     - Yield the check function, the input vector and output vector, which gets automatically run by nosetests    
+    """
+    perceptrons = [net.Perceptron(i, weights = [1]*(i+1)) for i in range(1,5)]
+    in_vecs = {perceptrons[0]: [[-50.7], [-1], [0], [0.5], [1], [100]],
+               perceptrons[1]: [[-37.5, -3], [-1, -1], [-5, 10], [-10, 5], [0, 0], [0, 1], [5, 5], [10.5, 1005]],
+               perceptrons[2]: [[-37.5, -3, -5.7], [-1, -1, -1], [-5, 10, 0], [-1, -1, 2], [-10, 5, 7], [0, 0, 0], [0, 1, 3], [5, 5, 10], [10.5, 1005, 11]],
+               perceptrons[3]: [[-37.5, -3, -5.7, -10], [-1, -1, -1, -1], [-5, 10, 0, 0], [-1, -1, 2, 1], [-10, 5, 7, 8.5], [0, 0, 0, 0], [0, 1, 3, 7.5], [5, 5, 10, 100], [10.5, 1005, 11, 13.5]]}
+    
+    out_vecs = {perceptrons[0]: [0, 0, 1, 1, 1, 1],
+                perceptrons[1]: [0, 0, 1, 0, 1, 1, 1, 1],
+                perceptrons[2]: [0, 0, 1, 1, 1, 1, 1, 1, 1],
+                perceptrons[3]: [0, 0, 1, 1, 1, 1, 1, 1, 1]}
+    for p in perceptrons:
+        for i, o in zip(in_vecs[p], out_vecs[p]):
+            yield check_perceptron_activate_with_heaviside_unit_weights, p, i, o
+    
+def check_perceptron_activate_with_heaviside_unit_weights(perc, in_vecs, out):
+    print(in_vecs, out)
+    assert(perc.activate(in_vecs) == out)
