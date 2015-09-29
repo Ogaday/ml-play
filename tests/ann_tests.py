@@ -13,7 +13,7 @@ def test_perceptron_activate_with_heaviside_no_weights():
      - Initialise a list of perceptrons with a different number of inputs (one to four) and no weights.
      - Generate sets of inputs with which to activate the perceptrons.
      - Generate the expected results from activating the perceptrons with such inputs and no weights.
-     - Yield the check function, the input vector and output vector, which gets automatically run by nosetests    
+     - Yield the check function, the input vector and output vector, which gets automatically run by nosetests
     """
     perceptrons = [net.Perceptron(i) for i in range(1,5)]
     in_vecs = {perceptrons[0]: [[-50.7], [-1], [0], [0.5], [1], [100]],
@@ -40,7 +40,7 @@ def test_perceptron_activate_with_heaviside_unit_weights():
      - Initialise a list of perceptrons with a different number of inputs (one to four) and unit weights.
      - Generate sets of inputs with which to activate the perceptrons.
      - Generate the expected results from activating the perceptrons with such inputs and unit weights.
-     - Yield the check function, the input vector and output vector, which gets automatically run by nosetests    
+     - Yield the check function, the input vector and output vector, which gets automatically run by nosetests
     """
     perceptrons = [net.Perceptron(i, weights = [1]*(i+1)) for i in range(1,5)]
     in_vecs = {perceptrons[0]: [[-50.7], [-1], [0], [0.5], [1], [100]],
