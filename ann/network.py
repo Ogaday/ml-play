@@ -13,8 +13,10 @@ class Perceptron:
             assert(len(self.weights)==ni+1)
         except TypeError:
             self.weights = [0]*(ni+1)
-            
-        self.func = func
+        if func:
+            self.func = func
+        else:
+            self.func = sum
             
     def activate(self, in_vec):
         in_vec = [1]+list(in_vec)
