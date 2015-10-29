@@ -59,3 +59,5 @@ target/
 # Jupyter files
 .ipynb_checkpoints/
 
+# Temporary files
+*.swp
