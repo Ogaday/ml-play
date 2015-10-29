@@ -61,6 +61,7 @@ class Graph:
           connected to the vertex indicated by V.
         """
         return [i for i in range(self.order) if self.matrix[i][V] > 0]
+    #replace [ ] with ( ) to create a generator: better practice, right?
 
     def get_tails(self, V):
         """
@@ -79,4 +80,4 @@ class Graph:
           connected to the vertex indicated by V.
         """
         return [i for i in range(self.order) if self.matrix[V][i] > 0]
-
+    #replace [ ] with ( ) to create a generator: better practice, right?
