@@ -7,11 +7,13 @@ class TestGraphBase(unittest.TestCase):
         self.costs={(0,0):0}    # pair: cost dict.
         self.heads={0:()}
         self.tails={0:()}
+        self.sources=(0,)
+        self.sinks=(0,)
 
     def testCosts(self):
-        print(self.costs)
+        # print(self.costs)
         for pair, c in self.costs.items():
-            print(pair, c)
+            # print(pair, c)
             self.assertEqual(self.G.cost(pair[0], pair[1]), c)
 
     def testHeads(self):
@@ -21,6 +23,12 @@ class TestGraphBase(unittest.TestCase):
     def testTails(self):
         for V, tails in self.tails.items():
             self.assertEqual(tuple(self.G.tails(V)), tails)
+
+    def testSources(self):
+        self.assertEqual(tuple(self.G.sources()), self.sources)
+
+    def testSinks(self):
+        self.assertEqual(tuple(self.G.sinks()), self.sinks)
 
 class TestGraphSimple(TestGraphBase):
     """
@@ -47,3 +55,5 @@ class TestGraphSimple(TestGraphBase):
         self.costs.update(rest)
         self.heads={0:(), 1:(0,), 2:(0,), 3:(1,2), 4:(1,2), 5:(3,4)}
         self.tails={0:(1,2), 1:(3,4), 2:(3,4), 3:(5,), 4:(5,), 5:()}
+        self.sources = (0,)
+        self.sinks = (5,)
