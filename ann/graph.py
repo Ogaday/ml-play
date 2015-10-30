@@ -5,7 +5,7 @@ class Graph:
 
     def __init__(self, matrix=[[]], directed=True):
         """
-        Initialise a Graph object. Default behaviour is initialise an empty
+        Initialise a Graph object. Default behaviour is to initialise an empty
         Graph.
 
         Arguments
@@ -78,7 +78,7 @@ class Graph:
         vertices : list
           list of vertex indices of the vertices at the heads of the edges
           connected to the vertex indicated by V.
-        """ 
+        """
         return [i for i in range(self.order) if self.matrix[V][i] > 0]
     #replace [ ] with ( ) to create a generator: better practice, right?
 
@@ -87,14 +87,14 @@ class Graph:
         Return the vertex indices for any vertex which is not at the tail of
         any edges in the graph.
         """
-        return (i for i in range(self.order) if len(tuple(heads(v))==0))
+        return (i for i in range(self.order) if len(tuple(self.heads(i)))==0)
 
     def sinks(self):
         """
         Return the vertex indices for any vertex which is not at the head of
         any edges in the graph.
         """
-        return (i for i in range(self.order) if len(tuple(tails(v))==0))
+        return (i for i in range(self.order) if len(tuple(self.tails(i)))==0)
 
 class UndirectedUnweightedCompleteGraph(Graph):
     def __init__(self, k):
