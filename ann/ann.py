@@ -1,4 +1,49 @@
-from graph import Graph
+from ann.graph import Graph
 
-class ann(Graph):
-    pass
+class ANN(Graph):
+    def __init__(self, matrix, func):
+        """
+        Initialise an ANN object. Default behaviour is initialise an empty
+        Graph.
+
+        Arguments
+        ---------
+        matrix : list
+          2d matrix formed by nested lists.
+        directed : bool
+          Boolean to change enforce symmetry of edge matrix for undirected
+          graphs.
+        """
+        self.matrix = matrix
+        self.order = len(matrix)
+        self.func = func
+        # Check matrix is square
+        # assert(isinstance(self.matrix, list))
+        for row in self.matrix:
+            assert(len(row) == self.order)
+            # assert(isinstance(row, list))
+            self.inputs={s:0 for s in self.sources()}
+
+    def activate(self, V):
+        """
+        Activate a vertex with index V by recursively calling activate on
+        vertices preceding V.
+
+        Arguments
+        ---------
+        V : int
+          Index of vertex.
+
+        Returns
+        -------
+        output : float
+        """
+        # Base case
+        if V in self.sources():
+            return self.inputs[V]
+        # Recursion case
+        else:
+            inputs = []
+            for v in self.heads(V):
+                inputs.append(self.cost(v,V)*self.activate(v))
+            return self.func(inputs)
