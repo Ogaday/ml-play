@@ -44,7 +44,7 @@ class Graph:
         """
         return self.matrix[V1][V2]
 
-    def get_heads(self, V):
+    def heads(self, V):
         """
         For a vertex index V, return the vertex indices for vertices which are
         at the heads of edges connected to the vertex indicated by V.
@@ -63,7 +63,7 @@ class Graph:
         return [i for i in range(self.order) if self.matrix[i][V] > 0]
     #replace [ ] with ( ) to create a generator: better practice, right?
 
-    def get_tails(self, V):
+    def tails(self, V):
         """
         For a vertex index V, return the vertex indices for vertices which are
         at the heads of edges connected to the vertex indicated by V.
@@ -81,3 +81,9 @@ class Graph:
         """
         return [i for i in range(self.order) if self.matrix[V][i] > 0]
     #replace [ ] with ( ) to create a generator: better practice, right?
+
+class UndirectedUnweightedCompleteGraph(Graph):
+    def __init__(self, k):
+        self.matrix=[[1 if i!=j else 0 for j in range(n)] for i in range(n)]
+        self.directed=False
+        self.order=k
