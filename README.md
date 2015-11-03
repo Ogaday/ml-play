@@ -14,3 +14,6 @@ Author: Ogaday
 *Citations*
  - I'm using the directory structure suggested in [Learn Python the Hard Way](http://learnpythonthehardway.org/book/ex46.html)
  - Citations pertinent to research should appear alongside that research. Also see [resources.md](https://github.com/Ogaday/ml-play/blob/master/resources.md) for more sources I'll be using.
+
+*Further Requirements*
+ - Also installed by pip are the modules green, nose\_parameterized.
