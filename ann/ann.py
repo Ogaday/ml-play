@@ -38,7 +38,7 @@ class ANN(Graph):
         output : float
         """
         # Base case
-        if V in self.sources():
+        if V in self.sources():    # in self.inputs
             return self.inputs[V]
         # Recursion case
         else:
@@ -46,3 +46,11 @@ class ANN(Graph):
             for v in self.heads(V):
                 inputs.append(self.cost(v,V)*self.activate(v))
             return self.func(inputs)
+
+    def feedforward(self, vals):
+        self.inputs={V:val for V, val in zip(self.sources(), vals)}
+        outputs={}    # make decision regarding returning dictionaries vs list,
+                      # refrring via indexes or vertices, etc.
+        for V in self.sinks():
+            outputs[V]=self.activate(V)
+        return outputs

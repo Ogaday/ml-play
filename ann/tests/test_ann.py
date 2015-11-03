@@ -1,34 +1,27 @@
 import unittest
 from ann.ann import ANN
+from ann.tests.test_graph import TestGraphBase
 
-class TestANNBase(unittest.TestCase):
+class TestANNBase(TestGraphBase):
     def setUp(self):
-        self.net=ANN([[0]], sum)
+        self.G=ANN([[0]], sum)
         self.costs={(0,0):0}    # pair: cost dict.
         self.heads={0:()}
         self.tails={0:()}
         self.sources=(0,)
         self.sinks=(0,)
+        self.order=1
+        # Should I be returning tuples or lists?
+        self.outputs={(0.1,):{0:0.1},(1,):{0:1},(5,):{0:5}}
 
-    def testCosts(self):
-        # print(self.costs)
-        for pair, c in self.costs.items():
-            # print(pair, c)
-            self.assertEqual(self.net.cost(pair[0], pair[1]), c)
+    def testFeedforward0_1(self):
+        self.assertEqual(self.G.feedforward((0.1,)), self.outputs[(0.1,)])
 
-    def testHeads(self):
-        for V, heads in self.heads.items():
-            self.assertEqual(tuple(self.net.heads(V)), heads)
+    def testFeedforward1(self):
+        self.assertEqual(self.G.feedforward((1,)),self.outputs[(1,)])
 
-    def testTails(self):
-        for V, tails in self.tails.items():
-            self.assertEqual(tuple(self.net.tails(V)), tails)
-
-    def testSources(self):
-        self.assertEqual(tuple(self.net.sources()), self.sources)
-
-    def testSinks(self):
-        self.assertEqual(tuple(self.net.sinks()), self.sinks)
+    def testFeedforward5(self):
+        self.assertEqual(self.G.feedforward((5,)),self.outputs[(5,)])
 
 class TestNetSimple(TestANNBase):
     """
@@ -43,12 +36,12 @@ class TestNetSimple(TestANNBase):
          2    4
     """
     def setUp(self):
-        self.net=ANN([[0,1,1,-1,-1,-1],
-                      [-1,0,-1,1,1,-1],
-                      [-1,-1,0,1,1,-1],
-                      [-1,-1,-1,0,-1,1],
-                      [-1,-1,-1,-1,0,1],
-                      [-1,-1,-1,-1,-1,0]], sum)
+        self.G=ANN([[0,1,1,-1,-1,-1],
+                    [-1,0,-1,1,1,-1],
+                    [-1,-1,0,1,1,-1],
+                    [-1,-1,-1,0,-1,1],
+                    [-1,-1,-1,-1,0,1],
+                    [-1,-1,-1,-1,-1,0]], sum)
         self.costs={(i,i):0 for i in range(6)}
         rest={(0,1):1,(0,2):1,(1,3):1,(1,4):1,(2,3):1,(2,4):1,(3,5):1,(4,5):1}
         self.costs.update(rest)
@@ -56,3 +49,5 @@ class TestNetSimple(TestANNBase):
         self.tails={0:(1,2), 1:(3,4), 2:(3,4), 3:(5,), 4:(5,), 5:()}
         self.sources = (0,)
         self.sinks = (5,)
+        self.order = 6
+        self.outputs={(0.1,):{5:0.4},(1,):{5:4},(5,):{5:20}}
