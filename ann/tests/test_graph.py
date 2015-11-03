@@ -9,6 +9,7 @@ class TestGraphBase(unittest.TestCase):
         self.tails={0:()}
         self.sources=(0,)
         self.sinks=(0,)
+        self.order=1
 
     def testCosts(self):
         # print(self.costs)
@@ -31,7 +32,7 @@ class TestGraphBase(unittest.TestCase):
         self.assertEqual(tuple(self.G.sinks()), self.sinks)
 
     def testOrder(self):
-        self.assertEquals(self.G.order(), 1)
+        self.assertEqual(self.G.order(), self.order)
 
 class TestGraphSimple(TestGraphBase):
     """
@@ -60,3 +61,4 @@ class TestGraphSimple(TestGraphBase):
         self.tails={0:(1,2), 1:(3,4), 2:(3,4), 3:(5,), 4:(5,), 5:()}
         self.sources = (0,)
         self.sinks = (5,)
+        self.order = 6
