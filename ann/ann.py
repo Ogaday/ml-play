@@ -15,14 +15,13 @@ class ANN(Graph):
           graphs.
         """
         self.matrix = matrix
-        self.order = len(matrix)
         self.func = func
         # Check matrix is square
         # assert(isinstance(self.matrix, list))
-        for row in self.matrix:
-            assert(len(row) == self.order)
+        # for row in self.matrix:
+        #     assert(len(row) == self.order)
             # assert(isinstance(row, list))
-            self.inputs={s:0 for s in self.sources()}
+        #    self.inputs={s:0 for s in self.sources()}
 
     def activate(self, V):
         """

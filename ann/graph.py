@@ -3,7 +3,7 @@ class Graph:
     Matrix representation of an edge weighted(, directed) graph.
     """
 
-    def __init__(self, matrix=[[]], directed=True):
+    def __init__(self, matrix=[[]]):
         """
         Initialise a Graph object. Default behaviour is to initialise an empty
         Graph.
@@ -17,13 +17,14 @@ class Graph:
           graphs.
         """
         self.matrix = matrix
-        self.directed = directed
-        self.order = len(matrix)
         # Check matrix is square
         # assert(isinstance(self.matrix, list))
-        for row in self.matrix:
-            assert(len(row) == self.order)
+        #for row in self.matrix:
+        #    assert(len(row) == self.order)
             # assert(isinstance(row, list))
+
+    def order(self):
+        return len(self.marix)
 
     def cost(self, V1, V2):
         """
@@ -60,7 +61,7 @@ class Graph:
           list of vertex indices of the vertices at the heads of the edges
           connected to the vertex indicated by V.
         """
-        return [i for i in range(self.order) if self.matrix[i][V] > 0]
+        return [i for i in range(self.order()) if self.matrix[i][V] > 0]
     #replace [ ] with ( ) to create a generator: better practice, right?
 
     def tails(self, V):

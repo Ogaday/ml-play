@@ -30,6 +30,9 @@ class TestGraphBase(unittest.TestCase):
     def testSinks(self):
         self.assertEqual(tuple(self.G.sinks()), self.sinks)
 
+    def testOrder(self):
+        self.assertEquals(self.G.order(), 1)
+
 class TestGraphSimple(TestGraphBase):
     """
     --->
