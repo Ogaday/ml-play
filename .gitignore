@@ -61,3 +61,4 @@ target/
 
 # Temporary files
 *.swp
+*.sw[a-zA-Z]
