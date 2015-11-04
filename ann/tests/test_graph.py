@@ -47,7 +47,7 @@ class TestGraphSimple(TestGraphBase):
          2    4
     """
     def setUp(self):
-        self.G=Graph(matrix = 
+        self.G=Graph(matrix =
                      [[0,1,1,-1,-1,-1],
                       [-1,0,-1,1,1,-1],
                       [-1,-1,0,1,1,-1],
