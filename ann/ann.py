@@ -1,4 +1,4 @@
-from ann.graph import Graph
+from graph import Graph
 
 class ANN(Graph):
     def __init__(self, matrix, func):
