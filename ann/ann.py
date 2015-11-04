@@ -54,3 +54,6 @@ class ANN(Graph):
         for V in self.sinks():
             outputs[V]=self.activate(V)
         return outputs
+
+# Concerns: What should I be returning? Be aware of ordering - I am referring
+# to vertices by indexes, but also by labels. Is that a problem?
