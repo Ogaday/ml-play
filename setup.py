@@ -3,7 +3,7 @@ try:
 except InputError:
     from distutils.core import setup
 
-requirements = ['nose']
+requirements = ['green', 'nose', 'nose_parameterized']
 
 config = {
     'description' : 'Package providing classes for machine learning data structures and algorithms',
