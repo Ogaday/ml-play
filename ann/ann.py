@@ -41,6 +41,11 @@ class ANN(Graph):
         if V in self.sources():    # in self.inputs
             return self.inputs[V]
         # Recursion case
+        elif V in self.sinks():
+            heads=self.heads(V)
+            assert(len(heads)==1)
+            v=heads[0]
+            return self.cost(v,V)*self.activate(v)
         else:
             inputs = []
             for v in self.heads(V):
