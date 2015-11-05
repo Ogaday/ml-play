@@ -3,8 +3,8 @@ from ann.graph import Graph
 
 class TestGraphBase(unittest.TestCase):
     def setUp(self):
-        self.G=Graph([[0]])
-        self.costs={(0,0):0}    # pair: cost dict.
+        self.G=Graph([[None]])
+        self.costs={}    # pair: cost dict.
         self.heads={0:()}
         self.tails={0:()}
         self.sources=(0,)
@@ -48,13 +48,13 @@ class TestGraphSimple(TestGraphBase):
     """
     def setUp(self):
         self.G=Graph(matrix =
-                     [[0,1,1,-1,-1,-1],
-                      [-1,0,-1,1,1,-1],
-                      [-1,-1,0,1,1,-1],
-                      [-1,-1,-1,0,-1,1],
-                      [-1,-1,-1,-1,0,1],
-                      [-1,-1,-1,-1,-1,0]])
-        self.costs={(i,i):0 for i in range(6)}
+                     [[None,   1,   1,None,None,None],
+                      [None,None,None,   1,   1,None],
+                      [None,None,None,   1,   1,None],
+                      [None,None,None,None,None,   1],
+                      [None,None,None,None,None,   1],
+                      [None,None,None,None,None,None]])
+        self.costs={(i,i):None for i in range(6)}
         rest={(0,1):1,(0,2):1,(1,3):1,(1,4):1,(2,3):1,(2,4):1,(3,5):1,(4,5):1}
         self.costs.update(rest)
         self.heads={0:(), 1:(0,), 2:(0,), 3:(1,2), 4:(1,2), 5:(3,4)}

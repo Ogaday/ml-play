@@ -5,8 +5,8 @@ from ann.functions import heaviside
 
 class TestANNBase(TestGraphBase):
     def setUp(self):
-        self.G=ANN([[0]], sum)
-        self.costs={(0,0):0}    # pair: cost dict.
+        self.G=ANN([[None]], sum)
+        self.costs={(0,0):None}    # pair: cost dict.
         self.heads={0:()}
         self.tails={0:()}
         self.sources=(0,)
@@ -41,13 +41,13 @@ class TestNetSimple(TestANNBase):
          2    4
     """
     def setUp(self):
-        self.G=ANN([[0,1,1,-1,-1,-1],
-                    [-1,0,-1,1,1,-1],
-                    [-1,-1,0,1,1,-1],
-                    [-1,-1,-1,0,-1,1],
-                    [-1,-1,-1,-1,0,1],
-                    [-1,-1,-1,-1,-1,0]], sum)
-        self.costs={(i,i):0 for i in range(6)}
+        self.G=ANN([[None,1,1,None,None,None],
+                    [None,None,None,1,1,None],
+                    [None,None,None,1,1,None],
+                    [None,None,None,None,None,1],
+                    [None,None,None,None,None,1],
+                    [None,None,None,None,None,None]], sum)
+        self.costs={(i,i):None for i in range(6)}
         rest={(0,1):1,(0,2):1,(1,3):1,(1,4):1,(2,3):1,(2,4):1,(3,5):1,(4,5):1}
         self.costs.update(rest)
         self.heads={0:(), 1:(0,), 2:(0,), 3:(1,2), 4:(1,2), 5:(3,4)}
@@ -71,11 +71,11 @@ class TestPerceptron(TestANNBase):
 
     """
     def setUp(self):
-        self.G=ANN([[ 0, 1,-1,-1,-1],
-                   [-1, 0,-1,-1,-1],
-                   [0.3,-1, 0,-1,-1],
-                   [0.5,-1,-1,-1, 0],
-                   [ 1,-1,-1, 0,-1]], sum)
+        self.G=ANN([[None,   1,None,None,None],
+                    [None,None,None,None,None],
+                    [ 0.3,None,None,None,None],
+                    [ 0.5,None,None,None,None],
+                    [   1,None,None,None,None]], sum)
         self.costs={(2,0):0.3, (3,0):0.5, (4,0):1, (0,1):1}
         self.heads={2:(), 3:(), 4:(), 0:(2,3,4), 1:(0,)}
         self.tails={2:(0,), 3:(0,), 4:(0,), 0:(1,), 1:()}
@@ -99,11 +99,11 @@ class TestPerceptronHeaviside(TestANNBase):
 
     """
     def setUp(self):
-        self.G=ANN([[ 0, 1,-1,-1,-1],
-                   [-1,  0,-1,-1,-1],
-                   [0.3,-1, 0,-1,-1],
-                   [0.5,-1,-1,0, -1],
-                   [ 1,-1,-1, -1, 0]], heaviside)
+        self.G=ANN([[None,   1,None,None,None],
+                    [None,None,None,None,None],
+                    [ 0.3,None,None,None,None],
+                    [ 0.5,None,None,None,None],
+                    [   1,None,None,None,None]], heaviside)
         self.costs={(2,0):0.3, (3,0):0.5, (4,0):1, (0,1):1}
         self.heads={2:(), 3:(), 4:(), 0:(2,3,4), 1:(0,)}
         self.tails={2:(0,), 3:(0,), 4:(0,), 0:(1,), 1:()}
@@ -126,18 +126,18 @@ class TestGershenson1(TestANNBase):
     1  3     5  7
     """
     def setUp(self):
-        self.G=ANN([[ 0,-1, 1,-1,-1,-1,-1,-1],
-                    [-1, 0,-1, 1,-1,-1,-1,-1],
-                    [-1,-1, 0,-1, 1, 1,-1,-1],
-                    [-1,-1,-1, 0, 1, 1,-1,-1],
-                    [-1,-1,-1,-1, 0,-1, 1,-1],
-                    [-1,-1,-1,-1,-1, 0,-1, 1],
-                    [-1,-1,-1,-1,-1,-1, 0,-1],
-                    [-1,-1,-1,-1,-1,-1,-1, 0]], sum)
-        self.costs={(2,0):0.3, (3,0):0.5, (4,0):1, (0,1):1}
-        self.heads={2:(), 3:(), 4:(), 0:(2,3,4), 1:(0,)}
-        self.tails={2:(0,), 3:(0,), 4:(0,), 0:(1,), 1:()}
-        self.sources=(2,3,4)
-        self.sinks=(1,)
-        self.order=5
+        self.G=ANN([[None,None,   1,None,None,None,None,None],
+                    [None,None,None,   1,None,None,None,None],
+                    [None,None,None,None,   1,   1,None,None],
+                    [None,None,None,None,   1,   1,None,None],
+                    [None,None,None,None,None,None,   1,None],
+                    [None,None,None,None,None,None,None,   1],
+                    [None,None,None,None,None,None,None,None],
+                    [None,None,None,None,None,None,None,None]], sum)
+        self.costs={(0,2):1, (1,3):1, (2,4):1, (3,5):1, (4,6):1, (5,7):1}
+        self.heads={0:(), 1:(), 2:(0,), 3:(1,), 4:(2,3), 5:(2,3), 6:(4,), 7:(5,)}
+        self.tails={0:(2,), 1:(3,), 2:(4,5), 3:(4,5), 4:(6,), 5:(7,), 6:(), 7:()}
+        self.sources=(0,1)
+        self.sinks=(6,7)
+        self.order=8
         self.outputs={}
