@@ -17,7 +17,8 @@ class TestANNBase(TestGraphBase):
 
     def testFeedforward(self):
         for inputs, output in self.outputs.items():
-            self.assertEqual(self.G.feedforward(inputs), output)
+            self.assertEqual({i:round(o, 6) for i, o in
+                              self.G.feedforward(inputs).items()},output)
 
 #    def testFeedforward0_1(self):
 #        self.assertEqual(self.G.feedforward((0.1,)), self.outputs[(0.1,)])
@@ -83,7 +84,7 @@ class TestPerceptron(TestANNBase):
         self.sinks=(1,)
         self.order=5
         self.outputs={(0,0,0):{1:0}, (1,1,1):{1:1.8}, (-1,1,1):{1:1.2},
-                      (0.5,0.3,1):{1:1.3}}
+                      (0.5,0.3,1):{1:1.3}, (1,1,-1):{1:-0.2}}
 
 class TestPerceptronHeaviside(TestANNBase):
     """
@@ -110,7 +111,8 @@ class TestPerceptronHeaviside(TestANNBase):
         self.sources=(2,3,4)
         self.sinks=(1,)
         self.order=5
-        self.outputs={}
+        self.outputs={(0,0,0):{1:0}, (1,1,1):{1:1}, (-1,1,1):{1:1},
+                      (0.5,0.3,1):{1:1}, (1, 1, -1):{1:0}}
 
 class TestGershenson1(TestANNBase):
     """
@@ -140,4 +142,9 @@ class TestGershenson1(TestANNBase):
         self.sources=(0,1)
         self.sinks=(6,7)
         self.order=8
-        self.outputs={}
+        self.outputs={(1,1):{6:2, 7:2}}
+
+
+
+# def testHeaviside(ins, weights, outs):
+#        print(heaviside([i*w for i, w in zip(ins,weights)]), outs)

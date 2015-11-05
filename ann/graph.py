@@ -98,7 +98,7 @@ class Graph:
         return (i for i in range(self.order()) if len(tuple(self.tails(i)))==0)
 
 class UndirectedUnweightedCompleteGraph(Graph):
-    def __init__(self, k): 
+    def __init__(self, k):
         self.matrix=[[1 if i!=j else 0 for j in range(n)] for i in range(n)]
         self.directed=False
         self.order=k
