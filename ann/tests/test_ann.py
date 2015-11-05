@@ -34,29 +34,30 @@ class TestNetSimple(TestANNBase):
     --->
          1   3
          o----o
-        / \  / \
-     0 o   \/   o 5
+        / \  / \5
+     0 o   \/   o--o 6
         \  /\  /
          \/  \/
          o----o
          2    4
     """
     def setUp(self):
-        self.G=ANN([[None,1,1,None,None,None],
-                    [None,None,None,1,1,None],
-                    [None,None,None,1,1,None],
-                    [None,None,None,None,None,1],
-                    [None,None,None,None,None,1],
-                    [None,None,None,None,None,None]], sum)
-        self.costs={(i,i):None for i in range(6)}
+        self.G=ANN([[None,   1,   1,None,None,None,None],
+                    [None,None,None,   1,   1,None,None],
+                    [None,None,None,   1,   1,None,None],
+                    [None,None,None,None,None,   1,None],
+                    [None,None,None,None,None,   1,None],
+                    [None,None,None,None,None,None,   1],
+                    [None,None,None,None,None,None,None]], sum)
+        self.costs={(i,i):None for i in range(7)}
         rest={(0,1):1,(0,2):1,(1,3):1,(1,4):1,(2,3):1,(2,4):1,(3,5):1,(4,5):1}
         self.costs.update(rest)
-        self.heads={0:(), 1:(0,), 2:(0,), 3:(1,2), 4:(1,2), 5:(3,4)}
-        self.tails={0:(1,2), 1:(3,4), 2:(3,4), 3:(5,), 4:(5,), 5:()}
+        self.heads={0:(), 1:(0,), 2:(0,), 3:(1,2), 4:(1,2), 5:(3,4), 6:(5,)}
+        self.tails={0:(1,2), 1:(3,4), 2:(3,4), 3:(5,), 4:(5,), 5:(6,), 6:()}
         self.sources = (0,)
-        self.sinks = (5,)
-        self.order = 6
-        self.outputs={(0.1,):{5:0.4},(1,):{5:4},(5,):{5:20}}
+        self.sinks = (6,)
+        self.order = 7
+        self.outputs={(0.1,):{6:0.4},(1,):{6:4},(5,):{6:20}}
 
 class TestPerceptron(TestANNBase):
     """
