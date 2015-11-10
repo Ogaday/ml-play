@@ -13,7 +13,7 @@ Links to valuable resources
 * [Graphs (Michael Fourman)](http://homepages.inf.ed.ac.uk/mfourman/teaching/mlCourse/notes/L13.pdf)
 * [Cornell Graphs Course](http://www.cs.cornell.edu/courses/cs312/2004fa/lectures/lecture14.htm)
 * ECM3722 - Graphs, Networks and Algorithms
-* [Data Structures for Graphs (MAxim Kolosovskiy)](http://arxiv.org/pdf/0908.3089.pdf)
+* [Data Structures for Graphs (Maxim Kolosovskiy)](http://arxiv.org/pdf/0908.3089.pdf)
 * [Aukland Graphs Representation](https://www.cs.auckland.ac.nz/software/AlgAnim/graph_rep.html)
 * [Implementing Graphs in Python](https://www.python.org/doc/essays/graphs/)
 * NetworkX - Python Module
